@@ -8,9 +8,9 @@
 
 int main()
 {
-    int mass[6] = { 5, 2, 4, 6, 1, 3 };
     int i,j = 0;
     int key = 0;
+    int mass[6] = { 31, 41, 59, 26, 41, 58 };
 
     /*
         Изначально mass[0] является отсортированной
@@ -58,9 +58,6 @@ int main()
         mass[i + 1] = key;
     }
 
-    /*
-        Выведем полученный результат
-    */
     for (i = 0; i < ARRAY_SIZE(mass); i++)
     {
         printf("mass[%d] = %d\n", i, mass[i]);
