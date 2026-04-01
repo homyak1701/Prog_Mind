@@ -1,48 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+    Инвариантом будет условие, что при i = [0;n-1]
+    если взять j так, что j = [0;i-1], то arr[j] != v
+*/
+int linear_search(int arr[], int n, int v)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == v)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 3)
     {
-        printf("Использование: %s <v> <a1> <a2> ... <an>\n", argv[0]);
+        printf("Using: %s <v> <a1> <a2> ... <an>\n", argv[0]);
         return 1;
     }
 
-    int v = atoi(argv[1]);   
-    int i = 0;
+    int v = atoi(argv[1]);
+    int n = argc - 2;
+    int *arr = malloc(n * sizeof(int));
 
     /*
-        Инвариант — это условие, которое остается истинным
-        на протяжении всего выполнения программы.
-
-        при i равным от 0 до (argc - 1)
-        atoi(argv[i - 1]) != v
+        Собираем элемены в отдельный массив;
     */
-    while (i < argc)
+    for (int i = 0; i < n; i++)
     {
-        if (i == 0)
-        {
-            printf("Инициализация: atoi(argv[i - 1]) = %d; v = %d", atoi(argv[i - 1]), v);
-        }
-        else
-        {
-            printf("Сохранение: atoi(argv[i - 1]) = %d; v = %d", atoi(argv[i - 1]), v);
-        }
-
-        if (atoi(argv[i - 1]) == v)
-        {
-            break;
-        }
-        else if (i == argc)
-        {
-            printf("Завершение: atoi(argv[i - 1]) = %d; v = %d", atoi(argv[i - 1]), v);
-            i = -1;
-            break;
-        }
-            
-        i++;
+        arr[i] = atoi(argv[i + 2]);
     }
 
-    printf("Ответ i = %d", i);
+    int result = linear_search(arr, n, v);
+
+
+    if (result != -1)
+    {
+        printf("Found at index: %d\n", result);
+    }
+    else
+    {
+        printf("NIL\n");
+    }
+
+    free(arr);
+
+    return 0;
 }
